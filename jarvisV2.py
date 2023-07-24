@@ -68,14 +68,14 @@ def generate_response(prompt):
         max_tokens = 1024,
         n = 1,
         stop = None,
-        temperature=0.5,
+        temperature=0.9,
     )
     message = completions.choices[0].text
     return message 
 
 # We will get the user's input by calling the get_text function
 def get_text():
-    input_text = st.text_input("You: ", key="input")
+    input_text = st.text_input("You:", key="input")
     return input_text
 
 user_input = get_text()
