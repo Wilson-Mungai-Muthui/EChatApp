@@ -48,7 +48,7 @@ def sidebar():
 
 
 # Set the model engine and your OpenAI API key
-model_engine = "text-davinci-003"
+model_engine = "gpt-3.5-turbo"
 openai.api_key = "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" 
 
 # sidebar()
