@@ -63,7 +63,7 @@ if 'past' not in st.session_state:
 
 def generate_response(prompt):
     completions = openai.Completion.create(
-        engine = "text-davinci-003",
+        engine = "gpt-3.5-turbo",
         prompt = prompt,
         max_tokens = 1024,
         n = 1,
@@ -75,7 +75,7 @@ def generate_response(prompt):
 
 # We will get the user's input by calling the get_text function
 def get_text():
-    input_text = st.text_input("You: ","Hello, how are you?", key="input")
+    input_text = st.text_input("You: ", key="input")
     return input_text
 
 user_input = get_text()
