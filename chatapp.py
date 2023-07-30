@@ -54,7 +54,7 @@ with st.sidebar:
 
 footer()
 
-@st.cache_data(show_spinner=False)
+'''@st.cache_data(show_spinner=False)
 def is_open_ai_key_valid(openai_api_key) -> bool:
     if not openai_api_key:
         st.error("Please enter your OpenAI API key in the sidebar!")
@@ -131,5 +131,5 @@ if transcript:
     if st.session_state['generated']:
         for i in range(len(st.session_state['generated'])-1, -1, -1):
             message(st.session_state["generated"][i], key=str(i))
-            message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+            message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')'''
             
