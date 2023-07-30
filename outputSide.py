@@ -10,27 +10,15 @@ url = "https://api.elevenlabs.io/v1/text-to-speech/AZnzlk1XvdvUeBnXmlld"
 headers = {
   "Accept": "audio/mpeg",
   "Content-Type": "application/json",
-  "xi-api-key": "1e92a485fb5c011d58945119747807fc"
+  "xi-api-key": "0ed0be1d1f638261788189c2afc57f33"
 }
 
-def autoplay_audio(file_path: str):
-    with open(file_path, "rb") as f:
-        data = f.read()
-        b64 = base64.b64encode(data).decode()
-        md = f"""
-            <audio autoplay="true">
-            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-            </audio>
-            """
-        '''st.markdown(
-            md,
-            unsafe_allow_html=True,
-        )'''
 
-def generateAudio(text, model_id, language_id):
+def generateAudio(text, voice_id, language_id):
     data = {
         "text": text,
-        "model_id": model_id,
+        "model_id":"eleven_multilingual_v1", 
+        "voice_id": voice_id,
         "language_id": language_id, 
         "voice_settings": {
             "stability": 0.5,
@@ -51,5 +39,4 @@ def generateAudio(text, model_id, language_id):
             if chunk:
                 file.write(chunk)
     
-    # autoplay_audio("output.mp3")
     st.audio("output.mp3")

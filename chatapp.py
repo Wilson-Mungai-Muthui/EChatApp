@@ -3,13 +3,11 @@ import openai
 import os
 from audio_recorder_streamlit import audio_recorder
 from streamlit_chat import message
-from streamlit.logger import get_logger
 from dotenv import load_dotenv
 from outputSide import generateAudio
 
 
-#openai.api_key = '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'
-logger = get_logger(__name__)
+openai.api_key = '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'
 load_dotenv()
 
 st.set_page_config(page_title="E-Commerce Chat Bot", page_icon="", layout="wide")
@@ -41,49 +39,11 @@ def footer():
 
 with st.sidebar:
     st.markdown('## Instructions\n')
-    api_key_input = st.text_input(
-    "OpenAI API Key",
-    type="password",
-    placeholder="Paste your OpenAI API key here (sk-...)",
-    help="You can get your API key from https://platform.openai.com/account/api-keys.",
-    value=os.environ.get("OPENAI_API_KEY", None)
-    or st.session_state.get("OPENAI_API_KEY", ""),
-    )
-    st.session_state["OPENAI_API_KEY"] = api_key_input
-    st.caption("*If you don't have an OpenAI API key, get it [here](https://platform.openai.com/account/api-keys).*")
-    model_id = st.selectbox("Choose model id", ("eleven_multilingual_v1", "eleven_monolingual_v1"))
-    language_id = st.selectbox("Choose language id", ("en", "de", "pl", "es", "it", "fr", "pt", "hi"))
+    voice_id = st.selectbox("Choose Sales Agent", ({"Rachel":"21m00Tcm4TlvDq8ikWAM", "Clyde":"2EiwWnXFnvU5JabPnv8n", "Bella":"EXAVITQu4vr4xnSDxMaL", "Dave":"CYw3kZ02Hs0563khs1Fj", "Antoni": "ErXwobaYiN019PkySvjV", "Emily":"LcfcDJNUP1GQjkzn1xUU", "Patrick": "ODq5zmih8GrVes37Dizd", "Harry":"SOYHLrjzK2X1ezoPC6cr", "Dorothy":"ThT5KcBeYPX3keUQqHPh", "Arnold":"VR6AewLTigWG4xSOukaG", "Charlotte":"XB0fDUnXU5powFXDhCwa", "Joseph":"Zlb1dXrM653N07WRdFW3", "Ethan":"g5CIjZEefAph4nQFvHAz", "Gigi":"jBpfuIE2acCO8z3wKNLl", "Serena":"pMsXgVXv3BLzUgSXRplE", "Adam":"pNInz6obpgDQGcFmaJgB", "Nicole":"piTKgcLEGmPE4e6mEKli", "Ryan":"wViXBPUzp2ZZixB1xQuM", "Glinda":"z9fAnlkpzviPz146aGWa", "Giovanni":"zcAOhNBS3c14rBihAFp1"}))
+    language_id = st.selectbox("Choose Language", ({"English":"en", "Deutsch":"de", "Polish":"pl", "Spanish":"es", "Italian":"it", "French":"fr", "Portugese":"pt", "Hindi":"hi"}))
     
 
 footer()
-
-@st.cache_data(show_spinner=False)
-def is_open_ai_key_valid(openai_api_key) -> bool:
-    if not openai_api_key:
-        st.error("Please enter your OpenAI API key in the sidebar!")
-        return False
-    try:
-        openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": "test"}],
-            api_key=openai_api_key,
-        )
-    except Exception as e:
-        st.error(f"{e.__class__.__name__}: {e}")
-        logger.error(f"{e.__class__.__name__}: {e}")
-        return False
-    return True
-
-openai.api_key = st.session_state.get("OPENAI_API_KEY")
-
-if not openai.api_key:
-    st.warning(
-        "Enter your OpenAI API key in the sidebar. You can get a key at"
-        " https://platform.openai.com/account/api-keys."
-    )
-
-if not is_open_ai_key_valid(openai.api_key):
-    st.stop()
 
 audio_file_1 = audio_recorder(text="Click to speak",  icon_size="1x", pause_threshold=1.0, sample_rate=41_000)
 
@@ -126,13 +86,10 @@ def generate_response(prompt):
 if transcript:
     transcript = transcript["text"]
     output = generate_response(transcript)
-    generateAudio(output, model_id, language_id)
+    generateAudio(output, voice_id, language_id)
     # store the output 
     st.session_state.past.append(transcript)
     st.session_state.generated.append(output)
-    
-    if st.session_state['generated']:
-        for i in range(len(st.session_state['generated'])-1, -1, -1):
-            message(st.session_state["generated"][i], key=str(i))
-            message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+    st.markdown("<h5 style='text-align: center;'>Play Audio Response </h1>", unsafe_allow_html=True)
+
             
