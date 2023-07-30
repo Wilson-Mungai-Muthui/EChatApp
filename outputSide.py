@@ -27,10 +27,11 @@ def autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )'''
 
-def generateAudio(text):
+def generateAudio(text, model_id, language_id):
     data = {
         "text": text,
-        "model_id": "eleven_monolingual_v1",
+        "model_id": model_id,
+        "language_id": language_id, 
         "voice_settings": {
             "stability": 0.5,
             "similarity_boost": 0.5

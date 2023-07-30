@@ -51,6 +51,9 @@ with st.sidebar:
     )
     st.session_state["OPENAI_API_KEY"] = api_key_input
     st.caption("*If you don't have an OpenAI API key, get it [here](https://platform.openai.com/account/api-keys).*")
+    model_id = st.selectbox("Choose model id", ("eleven_multilingual_v1", "eleven_monolingual_v1"))
+    language_id = st.selectbox("Choose language id", ("en", "de", "pl", "es", "it", "fr", "pt", "hi"))
+    
 
 footer()
 
@@ -123,7 +126,7 @@ def generate_response(prompt):
 if transcript:
     transcript = transcript["text"]
     output = generate_response(transcript)
-    generateAudio(output)
+    generateAudio(output, model_id, language_id)
     # store the output 
     st.session_state.past.append(transcript)
     st.session_state.generated.append(output)
