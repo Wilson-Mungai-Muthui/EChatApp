@@ -70,7 +70,7 @@ if 'past' not in st.session_state:
 # Function to generate a response using OpenAI GPT-3.5 with a persona
 def generate_response(prompt):
     messages = [
-        {"role": "system", "content": 'You are a machine learning expert. Respond in 40 words or less.'},
+        {"role": "system", "content": 'You are a sales assistant. Respond in 50 words or less.'},
         {"role": "user", "content": prompt},
     ]
     response = openai.ChatCompletion.create(
