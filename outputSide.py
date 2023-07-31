@@ -28,15 +28,15 @@ def generateAudio(text, voice_id, language_id):
     response = requests.post(url, json=data, headers=headers)
 
     # Generate empty file
-    with open("output.mp3", 'wb') as file:
+    with open("output.wav", 'wb') as file:
         pass
     
     # Save the response content to an .mp3 file
-    output_file = "output.mp3"
+    output_file = "output.wav"
     
     with open(output_file, 'wb') as file:
         for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
             if chunk:
                 file.write(chunk)
     
-    st.audio("output.mp3", format='mp3')
+    st.audio("output.wav", format='audio/wav')
