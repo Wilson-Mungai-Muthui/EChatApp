@@ -5,12 +5,9 @@ from audio_recorder_streamlit import audio_recorder
 from streamlit_chat import message
 from dotenv import load_dotenv
 from outputSide import generateAudio
-
-#openai.api_key = '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'
-#openai.api_key = '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'
+from queryEngine import customEngine
 
 load_dotenv()
-# openai.api_key = os.getenv("OPENAI_API_KEY")
 
 openai.api_key = st.secrets['OPENAI_API_KEY']
 
@@ -98,7 +95,8 @@ def generate_response(prompt):
 
 if transcript:
     transcript = transcript["text"]
-    output = generate_response(transcript)
+    # output = generate_response(transcript)
+    output = customEngine(transcript, chat_id='1')
     generateAudio(output, voice_id, language_id)
     # store the output 
     st.session_state.past.append(transcript)
