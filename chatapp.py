@@ -10,7 +10,9 @@ from outputSide import generateAudio
 #openai.api_key = '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'
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# openai.api_key = os.getenv("OPENAI_API_KEY")
+
+openai.api_key = st.secrets['OPENAI_API_KEY']
 
 st.set_page_config(page_title="E-Commerce Chat Bot", page_icon="", layout="wide")
 
@@ -18,7 +20,7 @@ col1, col2, col3 = st.columns(3)
 with col2:
     st.image("https://afrineuron.files.wordpress.com/2023/06/afrineuron-1-10-2.png")
     
-st.markdown("<h1 style='text-align: center; color: white;'>E-Commerce Chat Bot</h1>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>E-Commerce Chat Bot</h1>", unsafe_allow_html=True)
 
 def footer():
     hide_streamlit_style = """
@@ -97,7 +99,7 @@ if transcript:
     # store the output 
     st.session_state.past.append(transcript)
     st.session_state.generated.append(output)
-    st.markdown("<h5 style='text-align: center;'>Play Audio Response </h1>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center;'>Play Audio Response </h1>", unsafe_allow_html=True)
 
     if st.session_state['generated']:
         for i in range(len(st.session_state['generated'])-1, -1, -1):
