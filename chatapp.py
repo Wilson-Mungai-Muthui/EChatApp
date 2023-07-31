@@ -1,10 +1,11 @@
 import streamlit as st
 import openai
 import os
+import uuid
 from audio_recorder_streamlit import audio_recorder
 from streamlit_chat import message
 from dotenv import load_dotenv
-from outputSide import generateAudio
+from outputSide2 import generateAudio
 from queryEngine import customEngine
 
 load_dotenv()
@@ -96,8 +97,10 @@ def generate_response(prompt):
 if transcript:
     transcript = transcript["text"]
     # output = generate_response(transcript)
+    unique_id = str(uuid.uuid4())
+    file_path = f"output{unique_id}"
     output = customEngine(transcript, chat_id='1')
-    generateAudio(output, voice_id, language_id)
+    generateAudio(output, voice_id, language_id, file_path)
     # store the output 
     st.session_state.past.append(transcript)
     st.session_state.generated.append(output)
