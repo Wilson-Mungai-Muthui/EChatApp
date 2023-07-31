@@ -49,6 +49,9 @@ with st.sidebar:
 
 footer()
 
+st.session_state['generated'] = []
+st.session_state['past'] = []
+
 audio_file_1 = audio_recorder(text="Click to speak",  icon_size="1x", pause_threshold=1.0, sample_rate=41_000)
 
 if audio_file_1:
