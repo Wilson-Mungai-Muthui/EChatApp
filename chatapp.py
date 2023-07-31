@@ -5,7 +5,7 @@ import uuid
 from audio_recorder_streamlit import audio_recorder
 from streamlit_chat import message
 from dotenv import load_dotenv
-from outputSide2 import generateAudio
+from outputSide import generateAudio
 from queryEngine import customEngine
 
 load_dotenv()

@@ -13,8 +13,9 @@ headers = {
   "xi-api-key": "0ed0be1d1f638261788189c2afc57f33"
 }
 
+currentLocation = (os.getcwd())
 
-def generateAudio(text, voice_id, language_id):
+def generateAudio(text, voice_id, language_id, file_path):
     data = {
         "text": text,
         "model_id":"eleven_multilingual_v1", 
@@ -27,16 +28,15 @@ def generateAudio(text, voice_id, language_id):
     }
     response = requests.post(url, json=data, headers=headers)
 
-    # Generate empty file
-    with open("output.wav", 'wb') as file:
-        pass
+    output_file = os.path.join(currentLocation, file_path)
     
-    # Save the response content to an .mp3 file
-    output_file = "output.wav"
+    # Generate empty file
+    with open(output_file, 'wb') as file:
+        pass
     
     with open(output_file, 'wb') as file:
         for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
             if chunk:
                 file.write(chunk)
     
-    st.audio("output.wav", format='audio/wav')
+    st.audio(output_file, format='audio/wav')
