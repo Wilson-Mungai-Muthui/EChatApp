@@ -2,7 +2,6 @@ import requests
 import base64
 import time
 import os
-import pygame
 import streamlit as st
 
 CHUNK_SIZE = 1024
@@ -40,4 +39,4 @@ def generateAudio(text, voice_id, language_id):
             if chunk:
                 file.write(chunk)
     
-    st.audio("output.mp3")
+    st.audio("output.mp3", format='audio/wav')
