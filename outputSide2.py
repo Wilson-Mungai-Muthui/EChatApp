@@ -58,5 +58,5 @@ async def main():
     for text in texts:
         await generateAudio(text["message"], text["file_path"])
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     asyncio.run(main())
