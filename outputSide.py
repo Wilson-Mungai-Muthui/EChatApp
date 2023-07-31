@@ -39,4 +39,4 @@ def generateAudio(text, voice_id, language_id):
             if chunk:
                 file.write(chunk)
     
-    st.audio("output.mp3", format='audio/wav')
+    st.audio("output.mp3", format='mp3')
