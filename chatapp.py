@@ -42,7 +42,7 @@ def footer():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown('## Instructions\n')
+    st.markdown('## Chat Settings\n')
     voice_id = st.selectbox("Choose Sales Agent", ({"Rachel":"21m00Tcm4TlvDq8ikWAM", "Clyde":"2EiwWnXFnvU5JabPnv8n", "Bella":"EXAVITQu4vr4xnSDxMaL", "Dave":"CYw3kZ02Hs0563khs1Fj", "Antoni": "ErXwobaYiN019PkySvjV", "Emily":"LcfcDJNUP1GQjkzn1xUU", "Patrick": "ODq5zmih8GrVes37Dizd", "Harry":"SOYHLrjzK2X1ezoPC6cr", "Dorothy":"ThT5KcBeYPX3keUQqHPh", "Arnold":"VR6AewLTigWG4xSOukaG", "Charlotte":"XB0fDUnXU5powFXDhCwa", "Joseph":"Zlb1dXrM653N07WRdFW3", "Ethan":"g5CIjZEefAph4nQFvHAz", "Gigi":"jBpfuIE2acCO8z3wKNLl", "Serena":"pMsXgVXv3BLzUgSXRplE", "Adam":"pNInz6obpgDQGcFmaJgB", "Nicole":"piTKgcLEGmPE4e6mEKli", "Ryan":"wViXBPUzp2ZZixB1xQuM", "Glinda":"z9fAnlkpzviPz146aGWa", "Giovanni":"zcAOhNBS3c14rBihAFp1"}))
     language_id = st.selectbox("Choose Language", ({"English":"en", "Deutsch":"de", "Polish":"pl", "Spanish":"es", "Italian":"it", "French":"fr", "Portugese":"pt", "Hindi":"hi"}))
     
