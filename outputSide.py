@@ -40,12 +40,4 @@ def generateAudio(text, voice_id, language_id):
             if chunk:
                 file.write(chunk)
     
-    # st.audio("output.mp3")
-    pygame.mixer.init()
-    pygame.mixer.music.load(output_file)
-    pygame.mixer.music.play()
-
-    # Wait until the .mp3 file finishes playing
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
-    
+    st.audio("output.mp3")
