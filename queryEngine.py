@@ -17,7 +17,7 @@ load_dotenv()
 openai.api_key = st.secrets['OPENAI_API_KEY']
 
 Base_dir = os.path.dirname(os.getcwd())
-vectorIndexDir = os.path.join(Base_dir, "Jarvis/vector_index")
+vectorIndexDir = os.path.join(Base_dir, "vector_index")
 
 session_state = {}   #..Initialzing an empty dictionary to store key-value pairs
 
