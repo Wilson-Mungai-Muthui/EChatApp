@@ -6,9 +6,11 @@ from streamlit_chat import message
 from dotenv import load_dotenv
 from outputSide import generateAudio
 
+#openai.api_key = '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'
+#openai.api_key = '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'
 
-openai.api_key = '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'
 load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 st.set_page_config(page_title="E-Commerce Chat Bot", page_icon="", layout="wide")
 
@@ -59,6 +61,11 @@ audio_file= open("_audio_1.mp3", "rb")
 
 transcript = openai.Audio.transcribe("whisper-1", audio_file)
 # st.markdown (transcript["text"])
+
+# Button to reset conversation
+if st.button("Reset Conversation"):
+    st.session_state['generated'] = []
+    st.session_state['past'] = []
 
 # Storing the chat
 if 'generated' not in st.session_state:
