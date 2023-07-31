@@ -68,6 +68,7 @@ transcript = openai.Audio.transcribe("whisper-1", audio_file)
 if st.button("Reset Conversation"):
     st.session_state['generated'] = []
     st.session_state['past'] = []
+    st.stop()
 
 # Storing the chat
 if 'generated' not in st.session_state:
