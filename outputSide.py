@@ -3,6 +3,7 @@ import base64
 import time
 import os
 import streamlit as st
+from outputSide4 import stream_audio
 
 CHUNK_SIZE = 1024
 url = "https://api.elevenlabs.io/v1/text-to-speech/AZnzlk1XvdvUeBnXmlld"
@@ -38,5 +39,6 @@ def generateAudio(text, voice_id, language_id):
         for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
             if chunk:
                 file.write(chunk)
-    
-    st.audio("output.mp3", format='audio/wav')
+
+    # playAudio(output_file)
+    stream_audio(output_file)
