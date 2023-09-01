@@ -3,7 +3,7 @@ import base64
 import time
 import os
 import streamlit as st
-from outputSide4 import stream_audio
+from outputSide2 import stream_audio
 
 CHUNK_SIZE = 1024
 url = "https://api.elevenlabs.io/v1/text-to-speech/AZnzlk1XvdvUeBnXmlld"
@@ -15,12 +15,11 @@ headers = {
 }
 
 
-def generateAudio(text, voice_id, language_id):
+def generateAudio(text, voice):
     data = {
         "text": text,
         "model_id":"eleven_multilingual_v1", 
-        "voice_id": voice_id,
-        "language_id": language_id, 
+        "voice": voice, 
         "voice_settings": {
             "stability": 0.5,
             "similarity_boost": 0.5

@@ -6,6 +6,7 @@ from streamlit_chat import message
 from dotenv import load_dotenv
 from outputSide import generateAudio
 from queryEngine import customEngine
+from translate import convert
 
 load_dotenv()
 
@@ -38,14 +39,14 @@ def footer():
                 """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-with st.sidebar:
-    st.markdown('## Chat Settings\n')
-    voice_id = st.selectbox("Choose Sales Agent", ({"Rachel":"21m00Tcm4TlvDq8ikWAM", "Clyde":"2EiwWnXFnvU5JabPnv8n", "Bella":"EXAVITQu4vr4xnSDxMaL", "Dave":"CYw3kZ02Hs0563khs1Fj", "Antoni": "ErXwobaYiN019PkySvjV", "Emily":"LcfcDJNUP1GQjkzn1xUU", "Patrick": "ODq5zmih8GrVes37Dizd", "Harry":"SOYHLrjzK2X1ezoPC6cr", "Dorothy":"ThT5KcBeYPX3keUQqHPh", "Arnold":"VR6AewLTigWG4xSOukaG", "Charlotte":"XB0fDUnXU5powFXDhCwa", "Joseph":"Zlb1dXrM653N07WRdFW3", "Ethan":"g5CIjZEefAph4nQFvHAz", "Gigi":"jBpfuIE2acCO8z3wKNLl", "Serena":"pMsXgVXv3BLzUgSXRplE", "Adam":"pNInz6obpgDQGcFmaJgB", "Nicole":"piTKgcLEGmPE4e6mEKli", "Ryan":"wViXBPUzp2ZZixB1xQuM", "Glinda":"z9fAnlkpzviPz146aGWa", "Giovanni":"zcAOhNBS3c14rBihAFp1"}))
-    language_id = st.selectbox("Choose Language", ({"English":"en", "Deutsch":"de", "Polish":"pl", "Spanish":"es", "Italian":"it", "French":"fr", "Portugese":"pt", "Hindi":"hi"}))
-    
-
 footer()
 
+with st.sidebar:
+    st.markdown('## Chat Settings\n')
+    voice = st.selectbox("Choose Sales Agent", ("Rachel", "Clyde", "Bella", "Dave", "Antoni", "Emily", "Patrick", "Harry", "Dorothy", "Arnold", "Charlotte", "Joseph", "Ethan", "Gigi", "Serena", "Adam", "Nicole", "Ryan", "Glinda", "Giovanni"))
+    language = st.selectbox("Choose Language", ("English", "Deutsch", "Polish", "Spanish", "Italian", "French", "Portugese", "Hindi"))
+    
+                            
 st.session_state['generated'] = []
 st.session_state['past'] = []
 
@@ -95,9 +96,16 @@ def generate_response(prompt):
 
 if transcript:
     transcript = transcript["text"]
-    # output = generate_response(transcript)
     output = customEngine(transcript, chat_id='1')
-    generateAudio(output, voice_id, language_id)
+    if language == 'English':
+        with st.spinner("Converting into Audio..."):
+            generateAudio(output,voice)
+    else:
+        with st.spinner("Translating your context"):
+            language_translation = convert("en",language,output)
+            with st.spinner("Converting into Audio..."):
+                generateAudio(language_translation,voice)
+                
     # store the output 
     st.session_state.past.append(transcript)
     st.session_state.generated.append(output)
