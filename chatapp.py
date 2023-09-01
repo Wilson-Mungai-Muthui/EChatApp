@@ -12,13 +12,13 @@ load_dotenv()
 
 openai.api_key = st.secrets['OPENAI_API_KEY']
 
-st.set_page_config(page_title="E-Commerce Chat Bot", page_icon="", layout="wide")
+st.set_page_config(page_title="Kasuku AI🦜", page_icon="", layout="wide")
 
 col1, col2, col3 = st.columns(3)
 with col2:
     st.image("https://afrineuron.files.wordpress.com/2023/06/afrineuron-1-10-2.png")
     
-st.markdown("<h2 style='text-align: center;'>E-Commerce Chat Bot</h1>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Kasuku AI🦜</h1>", unsafe_allow_html=True)
 
 def footer():
     hide_streamlit_style = """
