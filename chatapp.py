@@ -6,7 +6,7 @@ from streamlit_chat import message
 from dotenv import load_dotenv
 from outputSide import generateAudio
 from queryEngine import customEngine
-from translate import convert
+
 
 load_dotenv()
 
@@ -97,14 +97,8 @@ def generate_response(prompt):
 if transcript:
     transcript = transcript["text"]
     output = customEngine(transcript, chat_id='1')
-    if language == 'English':
-        with st.spinner("Converting into Audio..."):
-            generateAudio(output,voice)
-    else:
-        with st.spinner("Translating your context"):
-            language_translation = convert("en",language,output)
-            with st.spinner("Converting into Audio..."):
-                generateAudio(language_translation,voice)
+    with st.spinner("Converting into Audio..."):
+        generateAudio(output,voice)
                 
     # store the output 
     st.session_state.past.append(transcript)
